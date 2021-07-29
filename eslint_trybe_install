@@ -1,0 +1,42 @@
+#!/bin/bash
+
+ROOT="$(git rev-parse --show-toplevel)"
+if [ -z "$ROOT" ]; then exit 1; fi
+
+echo '{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "trybe-frontend",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+    }
+}' > "$ROOT/.eslintrc.json"
+
+npm install eslint-config-trybe-frontend eslint-plugin-sonarjs eslint-plugin-react eslint
+
+python3 -c "
+from re import sub
+
+lint = '\"lint\": \"eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx\"'
+package = '$ROOT/package.json'
+
+file_read = open(package,  'r', encoding='utf-8').read()
+file_write = open(package,  'w', encoding='utf-8').write
+pkg = sub(r'(\"scripts\": \{(\n.+?,)+\n(\s+).+)', fr'\1,\n\3{lint}', file_read)
+
+file_write(pkg)
+"
