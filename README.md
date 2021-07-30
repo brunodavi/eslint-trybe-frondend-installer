@@ -11,3 +11,6 @@ Script para instalar a configuração padrão Eslint no modulo frond-end da tryb
 #### Execute dentro do seu projeto
     cd my-app
     ./pasta/para/eslint_trybe_install
+    
+#### Execução direta
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/brunodavi/eslint-trybe-frondend-installer/master/eslint_trybe_install)"
