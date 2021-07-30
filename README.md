@@ -5,8 +5,9 @@ Script para instalar a configuração padrão Eslint no modulo frond-end da tryb
 
 ## Como usar
 
-### Crie seu app em react
+#### Crie seu app em react
     npx create-react-app my-app
 
-### Execute dentro do seu projeto
-    ./eslint_trybe_install
+#### Execute dentro do seu projeto
+    cd my-app
+    ./pasta/para/eslint_trybe_install
